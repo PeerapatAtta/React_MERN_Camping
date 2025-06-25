@@ -1,3 +1,5 @@
+import Layout from '@/layouts/Layout';
+import LayoutAdmin from '@/layouts/LayoutAdmin';
 import About from '@/pages/About';
 import Dashboard from '@/pages/admin/Dashboard';
 import Manage from '@/pages/admin/Manage';
@@ -11,21 +13,13 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         {/* Public */}
-        <Route path="/" element={
-          <>
-            <h1>Main Navbar</h1>
-            <Outlet />
-          </>}>
-          <Route index element={<Home/>} />
+        <Route  element={<Layout/>}>
+          <Route path="/" element={<Home/>} />
            <Route path="about" element={<About/>} />
         </Route>     
        
         {/* Private */}
-        <Route path="admin" element={
-          <>
-            <h1>Admin Navbar</h1>
-            <Outlet />
-          </>}>
+        <Route path="admin" element={<LayoutAdmin/>}>
           <Route index element={<Dashboard/>} />
           <Route path="manage" element={<Manage/>} />
         </Route>
