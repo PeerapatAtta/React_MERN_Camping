@@ -12,6 +12,7 @@ import UserIcon from './UserIcon';
 import { Button } from '../ui/button';
 import { links } from '@/utils/links';
 import { Link } from 'react-router';
+import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
 const DropdownListManu = () => {
     return (
@@ -34,7 +35,25 @@ const DropdownListManu = () => {
                         )
                     })
                 }
-
+                <DropdownMenuSeparator />
+                <SignedOut>
+                    <DropdownMenuItem>
+                        <SignInButton mode="modal">
+                            <button>Login</button>
+                        </SignInButton>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <SignUpButton mode="modal">
+                            <button>Register</button>
+                        </SignUpButton>
+                    </DropdownMenuItem>
+                </SignedOut>
+                <SignedIn>
+                    <DropdownMenuItem>
+                        <UserButton />
+                        <SignOutButton/>
+                    </DropdownMenuItem>
+                </SignedIn>
             </DropdownMenuContent>
         </DropdownMenu>
     )
