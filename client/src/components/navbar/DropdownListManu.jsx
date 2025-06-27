@@ -13,6 +13,7 @@ import { Button } from '../ui/button';
 import { links } from '@/utils/links';
 import { Link } from 'react-router';
 import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import SignOutLink from './SignOutLink';
 
 const DropdownListManu = () => {
     return (
@@ -50,8 +51,9 @@ const DropdownListManu = () => {
                 </SignedOut>
                 <SignedIn>
                     <DropdownMenuItem>
-                        <UserButton />
-                        <SignOutButton/>
+                        {/* <UserButton />
+                        <SignOutButton/> */}
+                        <SignOutLink />
                     </DropdownMenuItem>
                 </SignedIn>
             </DropdownMenuContent>
