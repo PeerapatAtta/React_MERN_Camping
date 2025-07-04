@@ -4,10 +4,11 @@ import { Outlet } from 'react-router'
 
 const LayoutAdmin = () => {
   return (
-    <div>
-        <Navbar />
-        <Outlet />        
-        </div>
+    <main className='container'>
+      <Navbar />
+      <hr />
+      <Outlet />
+    </main>
   )
 }
 
