@@ -10,9 +10,11 @@ import Buttons from '@/components/form/Buttons';
 
 const Camping = () => {
 
-    const { register, handleSubmit,formState } = useForm({resolver: zodResolver(campingSchema)});
+    const { register, handleSubmit, formState } = useForm({ resolver: zodResolver(campingSchema) });
 
-    const { errors } = formState;    
+    const { errors, isSubmitting } = formState;
+
+    console.log(isSubmitting);
 
     const onSubmit = async (data) => {
         await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -30,9 +32,13 @@ const Camping = () => {
                     <div className='grid md:grid-cols-2 gap-4 mt-4'>
                         <FormInputs register={register} name='title' type='text' placeholder='Input your Title' errors={errors} />
                         <FormInputs register={register} name='price' type='number' placeholder='Input your Price' errors={errors} />
-                        <TextAreaInput register={register} name='description' type='text' placeholder='Input your Desciption' errors={errors}/>
+                        <TextAreaInput register={register} name='description' type='text' placeholder='Input your Desciption' errors={errors} />
                     </div>
-                    <Buttons text="Create Camping" isPending={isSubmitting}/>
+                    <Buttons
+                        text="Create Camping"
+                        isPending={isSubmitting}
+                        type="submit"
+                    />
                 </form>
             </div>
         </section>
