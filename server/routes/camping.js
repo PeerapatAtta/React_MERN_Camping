@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const {
     listCamping,
     readCamping,
@@ -6,8 +7,7 @@ const {
     updateCamping,
     deleteCamping
 } = require('../controllers/camping');
-
-const router = express.Router();
+const { authCheck } = require('../midllewares/auth'); 
 
 // Endpoint https://localhost:5000/api:
 router.get('/camping', listCamping);
