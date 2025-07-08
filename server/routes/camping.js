@@ -1,30 +1,24 @@
 const express = require('express');
+const {
+    listCamping,
+    readCamping,
+    createCamping,
+    updateCamping,
+    deleteCamping
+} = require('../controllers/camping');
 
 const router = express.Router();
 
 // Endpoint https://localhost:5000/api:
-router.get('/camping', (req, res) => {
-    res.json('Camping route is working!');
-});
+router.get('/camping', listCamping);
 
-router.get('/camping/:id', (req, res) => {
-    const { id } = req.params;
-    res.json(`Camping GET with ID: ${id}`);
-});
+router.get('/camping/:id', readCamping);
 
-router.post('/camping', (req, res) => {
-    const { title, price, description } = req.body;
-    console.log(`Title: ${title}, Price: ${price}, Description: ${description}`);
-    res.send('Camping POST');
-});
+router.post('/camping', createCamping);
 
-router.put('/camping/:id', (req, res) => {
-    res.send('Camping PUT');
-});
+router.put('/camping/:id', updateCamping);
 
-router.delete('/camping/:id', (req, res) => {
-    res.send('Camping DELETE');
-});
+router.delete('/camping/:id', deleteCamping);
 
 
 module.exports = router;
