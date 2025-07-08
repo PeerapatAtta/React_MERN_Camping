@@ -1,15 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const campingRoute = require('./routes/camping');
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors()); // Middleware to allow cross-origin requests
+app.use(express.json()); // Middleware to parse JSON bodies
 
 // Routes
-app.get('/', (req, res) => {
-  res.json('Hello from the server!' );
-});
+app.use('/api', campingRoute);
 
 
 const PORT = 5000;
