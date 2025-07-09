@@ -1,12 +1,11 @@
-exports.createProfile = (req, res) => {
+exports.createProfile = (req, res, next) => {
     try {
         const { name, age, bio } = req.body;
         console.log(`Name: ${name}, Age: ${age}, Bio: ${bio}`);
         res.json('Profile created successfully');
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        next(error); // Pass the error to the error handling middleware
     }
 }
 
