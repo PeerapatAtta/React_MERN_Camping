@@ -11,6 +11,6 @@ export const campingSchema = z.object({
 })
 
 export const profileSchema = z.object({
-    firstname: z.string().min(2, 'Firstname must be at least 2 characters long'),
-    lastname: z.string().min(2, 'Lastname must be at least 2 characters long'),
+    firstname: z.string().min(1, 'Firstname must be at least 1 character long'),
+    lastname: z.string().min(1, 'Lastname must be at least 1 character long'),
 })

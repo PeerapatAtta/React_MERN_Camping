@@ -1,7 +1,7 @@
 exports.createProfile = (req, res, next) => {
     try {
-        const { firstname, lastname, clerkid } = req.body;   
-        console.log('Received data:', { firstname, lastname, clerkid });     
+        const { firstname, lastname } = req.body;   
+        console.log('Received data:', { firstname, lastname });     
         res.json('Profile created successfully');
     } catch (error) {
         console.log(error.message);
