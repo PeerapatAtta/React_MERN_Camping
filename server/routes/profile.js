@@ -7,9 +7,10 @@ const {
     updateProfile,
     deleteProfile
 } = require('../controllers/profile');
+const { authCheck } = require('../midllewares/auth');
 
 // Endpoint https://localhost:5000/api/profile
-router.get('/profile', listProfile);
+router.get('/profile',authCheck ,listProfile);
 router.get('/profile/:id', readProfile);
 router.post('/profile', createProfile);
 router.put('/profile/:id', updateProfile);
