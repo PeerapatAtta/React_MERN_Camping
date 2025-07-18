@@ -1,27 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {
-    listProfile,
-    readProfile,
-    createProfile,
-    updateProfile,
-    deleteProfile
-} = require('../controllers/profile');
+const { createProfile } = require('../controllers/profile');
 const { authCheck } = require('../midllewares/auth');
 
 // Endpoint https://localhost:5000/api/profile
-router.get('/profile',authCheck ,listProfile);
-router.get('/profile/:id', readProfile);
-router.post('/profile', createProfile);
-router.put('/profile/:id', updateProfile);
-router.delete('/profile/:id', deleteProfile);
-
+router.post('/profile',authCheck ,createProfile);
 
 module.exports = router; // This is the profile route file that handles all profile-related requests
-
-
-
-
-
-
-module.exports = router;
+    
