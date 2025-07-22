@@ -23,7 +23,7 @@ exports.createCamping = (req, res) => {
     try {
         const { title, price, description } = req.body;
         console.log(`Title: ${title}, Price: ${price}, Description: ${description}`);
-        res.json('Camping POST');
+        res.json('Create Camping Success!');
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'Internal Server Error' });

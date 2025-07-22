@@ -7,19 +7,28 @@ import {campingSchema} from '@/utils/schemas';
 import Buttons from '@/components/form/Buttons';
 import CategoryInput from '@/components/form/CategoryInput';
 import Mainmap from '@/components/map/Mainmap';
+import { createCamping } from '@/api/camping';
+import { useAuth } from '@clerk/clerk-react'; // useAuth ใช้เพื่อจัดการการยืนยันตัวตนของผู้ใช้
 
 
 const Camping = () => {
-
+  const { getToken, userId } = useAuth(); // ดึงข้อมูลผู้ใช้ที่เข้าสู่ระบบจาก useAuth
   const { register, handleSubmit, formState, setValue } = useForm({ resolver: zodResolver(campingSchema) });
-
   const { errors, isSubmitting } = formState;
 
   console.log(isSubmitting);
 
   const onSubmit = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log(data);
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    const token = await getToken(); // ดึง token สำหรับการยืนยันตัวตนของผู้ใช้
+    console.log(token);
+    createCamping(token, data)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
 
 

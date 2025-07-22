@@ -38,7 +38,7 @@ const Mainmap = ({ register, location, setValue }) => {
                     <input hidden {...register('lng')} />
                 </>
             }
-            <h1 className="text-2xl font-semibold mt-4">Map</h1>
+            <h1 className="text-2xl font-semibold mt-4">Map (Select Location)</h1>
             {
                 position && (
                     <p className="text-sm text-gray-500">
