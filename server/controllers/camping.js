@@ -1,3 +1,5 @@
+const prisma = require("../config/prisma");
+
 exports.listCamping = (req, res) => {
     try {
         res.json('Camping route is working!:');
@@ -19,11 +21,28 @@ exports.readCamping = (req, res) => {
     }
 }
 
-exports.createCamping = (req, res) => {
+exports.createCamping = async (req, res) => {
     try {
-        const { title, price, description } = req.body;
-        console.log(`Title: ${title}, Price: ${price}, Description: ${description}`);
-        res.json('Create Camping Success!');
+        const { title, description, price, category, lat, lng } = req.body;
+        const { id } = req.user;
+
+        const camping = await prisma.landmark.create({
+            data: {
+                title: title,
+                description: description,
+                price: price,
+                category: category,
+                lat: lat,
+                lng: lng,
+                profileId: id
+            }
+        });
+
+        res.json({
+            message: 'Create Camping Success!',
+            result: camping
+        });
+
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'Internal Server Error' });
