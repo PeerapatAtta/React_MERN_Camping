@@ -1,10 +1,11 @@
+import MapHome from '@/components/map/MapHome'
 import React from 'react'
 
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <MapHome />
     </div>
   )
 }
