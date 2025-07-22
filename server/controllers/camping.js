@@ -1,8 +1,9 @@
 const prisma = require("../config/prisma");
 
-exports.listCamping = (req, res) => {
+exports.listCamping = async (req, res) => {
     try {
-        res.json('Camping route is working!:');
+        const campings = await prisma.landmark.findMany();
+        res.json({result: campings});
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -10,10 +11,15 @@ exports.listCamping = (req, res) => {
     }
 }
 
-exports.readCamping = (req, res) => {
+exports.readCamping = async (req, res) => {
     try {
         const { id } = req.params;
-        res.json(`Camping GET with ID: ${id}`);
+         const camping = await prisma.landmark.findUnique({
+             where: {
+                 id: parseInt(req.params.id)
+             }
+         });
+        res.json({result: camping});
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'Internal Server Error' });

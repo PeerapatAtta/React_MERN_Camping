@@ -10,7 +10,7 @@ const {
 const { authCheck } = require('../midllewares/auth'); 
 
 // Endpoint https://localhost:5000/api/camping
-router.get('/camping',authCheck, listCamping);
+router.get('/camping',listCamping);
 router.get('/camping/:id', readCamping);
 router.post('/camping',authCheck,createCamping);
 router.put('/camping/:id', updateCamping);
