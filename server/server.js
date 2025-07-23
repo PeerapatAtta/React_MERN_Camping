@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware
 app.use(cors()); // Middleware to allow cross-origin requests
-app.use(express.json()); // Middleware to parse JSON bodies
+app.use(express.json({ limit: '10mb' })); // Middleware to parse JSON bodies
 app.use(morgan('dev')); // Middleware for logging HTTP requests
 app.use(clerkMiddleware()); // Middleware for Clerk authentication
 
