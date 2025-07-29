@@ -13,22 +13,23 @@ import FormUploadImage from '@/components/form/FormUploadImage';
 
 
 const Camping = () => {
-  const { getToken, userId } = useAuth(); // ดึงข้อมูลผู้ใช้ที่เข้าสู่ระบบจาก useAuth
-  const { register, handleSubmit, formState, setValue } = useForm({ resolver: zodResolver(campingSchema) });
+  const { getToken } = useAuth(); // ดึงข้อมูลผู้ใช้ที่เข้าสู่ระบบจาก useAuth
+  const { register, handleSubmit, formState, setValue, reset } = useForm({ resolver: zodResolver(campingSchema) });
   const { errors, isSubmitting } = formState;
 
   console.log(isSubmitting);
 
-  const onSubmit = async (data) => {
+  const hdlSubmit = async (data) => {
     // await new Promise((resolve) => setTimeout(resolve, 1000));
     const token = await getToken(); // ดึง token สำหรับการยืนยันตัวตนของผู้ใช้
-    console.log(token);
+    console.log(data);
     createCamping(token, data)
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        console.log(res.data);
+        reset(); // รีเซ็ตฟอร์มหลังจากการส่งข้อมูลสำเร็จ
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -39,7 +40,7 @@ const Camping = () => {
         Create Camping
       </h1>
       <div className='border p-8 rounded-md'>
-        <form onSubmit={handleSubmit(onSubmit)} >
+        <form onSubmit={handleSubmit(hdlSubmit)} >
           <div className='grid md:grid-cols-2 gap-4 mt-4'>
             <FormInputs register={register} name='title' type='text' placeholder='Input your Title' errors={errors} />
             <FormInputs register={register} name='price' type='number' placeholder='Input your Price' errors={errors} />
@@ -50,7 +51,7 @@ const Camping = () => {
                 register={register}
                 setValue={setValue}
               />
-              <FormUploadImage />
+              <FormUploadImage setValue={setValue} />
             </div>
           </div>
           <Mainmap register={register} setValue={setValue} />
