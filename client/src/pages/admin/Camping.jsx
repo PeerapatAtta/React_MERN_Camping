@@ -10,6 +10,8 @@ import Mainmap from '@/components/map/Mainmap';
 import { createCamping } from '@/api/camping';
 import { useAuth } from '@clerk/clerk-react'; // useAuth ใช้เพื่อจัดการการยืนยันตัวตนของผู้ใช้
 import FormUploadImage from '@/components/form/FormUploadImage';
+import { createAlert } from '@/utils/createAlert';
+
 
 
 const Camping = () => {
@@ -27,9 +29,11 @@ const Camping = () => {
       .then((res) => {
         console.log(res.data);
         reset(); // รีเซ็ตฟอร์มหลังจากการส่งข้อมูลสำเร็จ
+        createAlert('success', 'Camping created successfully!'); // แสดงข้อความแจ้งเตือนเมื่อสร้าง Camping สำเร็จ
       })
       .catch((err) => {
         console.error(err);
+        createAlert('error', 'Failed to create camping!'); // แสดงข้อความแจ้งเตือนเมื่อสร้าง Camping ไม่สำเร็จ
       });
   };
 
