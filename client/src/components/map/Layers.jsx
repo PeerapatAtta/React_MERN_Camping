@@ -8,6 +8,7 @@ const Layers = () => {
 
     const [landmarks, setLandmarks] = useState([]);
 
+    // Fetch landmarks when the component mounts
     useEffect(() => {
         hdlGetLandmark();
     }, []);

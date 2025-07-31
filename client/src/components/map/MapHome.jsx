@@ -6,7 +6,7 @@ import Layers from './Layers';
 const MapHome = () => {
 
   return (
-    <div>
+    <div >
       <MapContainer
         className='h-[50vh] rounded-md z-0'
         center={[13, 100]}

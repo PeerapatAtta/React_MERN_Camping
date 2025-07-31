@@ -1,11 +1,10 @@
-import MapHome from '@/components/map/MapHome'
+import CampingContainer from '@/components/home/CampingContainer'
 import React from 'react'
-
 
 const Home = () => {
   return (
     <div>
-      <MapHome />
+      <CampingContainer />
     </div>
   )
 }
