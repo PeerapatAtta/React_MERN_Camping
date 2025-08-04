@@ -1,29 +1,13 @@
 //rafce
+import useCampingStore from '@/store/camping-store'
 import React from 'react'
 import { LayersControl, MapContainer, TileLayer, Marker, Popup, LayerGroup, Tooltip } from 'react-leaflet'
-import { useState, useEffect } from 'react'
-import { listCamping } from '@/api/camping';
+
 
 const Layers = () => {
 
-    const [landmarks, setLandmarks] = useState([]);
+    const campings = useCampingStore((state) => state.campings);
 
-    // Fetch landmarks when the component mounts
-    useEffect(() => {
-        hdlGetLandmark();
-    }, []);
-
-    const hdlGetLandmark = () => {
-        console.log('Get Landmarks');
-        listCamping()
-            .then((res) => {
-                console.log('Get Landmarks Success', res.data);
-                setLandmarks(res.data.result);
-            })
-            .catch((err) => {
-                console.error('Get Landmarks Error', err);
-            });
-    }
     return (
         <LayersControl >
             <LayersControl.BaseLayer checked name="OSM">
@@ -40,7 +24,7 @@ const Layers = () => {
             </LayersControl.BaseLayer>
             <LayersControl.Overlay name="Landmark" checked>
                 <LayerGroup>
-                    {landmarks.map((item) => {
+                    {campings.map((item) => {
                         return (
                             <Marker key={item.id} position={[item.lat, item.lng]}>
                                 <Popup>

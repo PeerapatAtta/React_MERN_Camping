@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { listCamping } from '@/api/camping';
+import React from 'react'
 import CampingCard from '../card/CampingCard';
+import useCampingStore from '@/store/camping-store';
 
 const CampingLists = () => {
-  // useState ใช้สำหรับเก็บข้อมูล
-  const [campings, setCampings] = useState([]);
-  console.log('Get Camping List:', campings);
 
-  // useEffect  ใช้สำหรับการเรียกใช้ฟังก์ชันเมื่อคอมโพเนนต์ถูกเรียกใช้งาน
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const res = await listCamping();
-      setCampings(res.data.result);
-    } catch (error) {
-      console.error('Error fetching camping List:', error);
-    }
-  }
+  const campings = useCampingStore((state) => state.campings);
 
   return (
     <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
