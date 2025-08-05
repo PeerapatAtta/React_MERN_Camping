@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { readCamping } from '@/api/camping';
+import Breadcrums from '@/components/campings/Breadcrums';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 
 const CampingDetail = () => {
-  const [camping, setCamping] = useState([]);
+    const [camping, setCamping] = useState([]);
     const { id } = useParams(); // Assuming you are using react-router to get the camping ID from the URL
 
     useEffect(() => {
@@ -21,7 +23,9 @@ const CampingDetail = () => {
     console.log(camping);
 
     return (
-        <div>CampingDetail</div>
+        <div>
+            <Breadcrums name={camping.title} />
+        </div>
     )
 }
 
