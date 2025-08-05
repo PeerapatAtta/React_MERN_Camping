@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { readCamping } from '@/api/camping';
 import Breadcrums from '@/components/campings/Breadcrums';
+import Description from '@/components/campings/Description';
+import ImageContainer from '@/components/campings/ImageContainer';
+import Mainmap from '@/components/map/Mainmap';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 
@@ -25,6 +28,18 @@ const CampingDetail = () => {
     return (
         <div>
             <Breadcrums name={camping.title} />
+            <header className='flex justify-between items-center p-4 bg-gray-100 mt-4'>
+                <h1 className='text-2xl font-bold'>{camping.title}</h1>
+                <div className='flex space-x-4'>
+                    <p>Share</p>
+                    <p>Favorite</p>
+                </div>
+            </header>
+            <ImageContainer image={camping.secure_url} name={camping.name} />
+            <div>
+                <Description text={camping.description} />
+                {camping.lat && <Mainmap location={[camping.lat, camping.lng]} />}
+            </div>
         </div>
     )
 }
