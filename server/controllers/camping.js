@@ -1,33 +1,29 @@
 const prisma = require("../config/prisma");
 
-exports.listCamping = async (req, res) => {
+exports.listCamping = async (req, res, next) => {
     try {
         const campings = await prisma.landmark.findMany();
-        res.json({result: campings});
+        res.json({ result: campings });
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        next(error);
     }
 }
 
-exports.readCamping = async (req, res) => {
+exports.readCamping = async (req, res, next) => {
     try {
         const { id } = req.params;
-         const camping = await prisma.landmark.findUnique({
-             where: {
-                 id: parseInt(req.params.id)
-             }
-         });
-        res.json({result: camping});
+        const camping = await prisma.landmark.findUnique({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        });
+        res.json({ result: camping });
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        next(error);
     }
 }
 
-exports.createCamping = async (req, res) => {
+exports.createCamping = async (req, res, next) => {
     try {
         const { title, description, price, category, lat, lng, image } = req.body;
         const { id } = req.user;
@@ -52,30 +48,24 @@ exports.createCamping = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        next(error);
     }
 }
 
-exports.updateCamping = (req, res) => {
+exports.updateCamping = (req, res, next) => {
     try {
         const { id } = req.params;
         res.json(`Camping PUT with ID: ${id}`);
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        next(error);
     }
 }
 
-exports.deleteCamping = (req, res) => {
+exports.deleteCamping = (req, res, next) => {
     try {
         const { id } = req.params;
         res.json(`Camping DELETE with ID: ${id}`);
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: 'Internal Server Error' });
-        return;
+        next(error);
     }
 }

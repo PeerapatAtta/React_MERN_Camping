@@ -8,6 +8,7 @@ import { useAuth } from '@clerk/clerk-react'; // useAuth ใช้เพื่�
 import { createProfile } from '@/api/profile';
 
 const Profile = () => {
+  // eslint-disable-next-line no-unused-vars
   const { getToken, userId } = useAuth(); // ดึงข้อมูลผู้ใช้ที่เข้าสู่ระบบจาก useAuth
   const { register, handleSubmit, formState } = useForm({ resolver: zodResolver(profileSchema) }); // useForm ใช้เพื่อจัดการฟอร์ม 
   const { errors, isSubmitting } = formState; // formState ใช้เพื่อจัดการสถานะของฟอร์ม เช่น ข้อผิดพลาดและสถานะการส่ง

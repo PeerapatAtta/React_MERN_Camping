@@ -10,20 +10,22 @@ import Profile from '@/pages/user/Profile';
 import React from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
 import ProtectRoute from './ProtectRoute';
+import CampingDetail from '@/pages/user/CampingDetail';
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public */}
+        {/* Public Guest */}
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
         </Route>
 
-        {/* Private User */}
+        {/* Private Member */}
         <Route path="user" element={<Layout />}>          
           <Route path="profile" element={<Profile />} />
+          <Route path="camping/:id" element={<CampingDetail />} />
         </Route>
 
         {/* Private Admin*/}
