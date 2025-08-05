@@ -1,7 +1,11 @@
 
-export const links = [
-    {href: "/user/profile", label: "My Profile"},
-    {href: "/", label: "Home"},
-    {href: "/about", label: "About"},
-    {href: "/admin/camping", label: "Camping"},    
+export const publicLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+
+]
+
+export const privateLinks = [
+    { href: "/user/profile", label: "My Profile" },
+    { href: "/admin/camping", label: "Camping" },
 ]

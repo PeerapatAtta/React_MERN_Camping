@@ -10,7 +10,7 @@ import {
 import { AlignLeft } from 'lucide-react';
 import UserIcon from './UserIcon';
 import { Button } from '../ui/button';
-import { links } from '@/utils/links';
+import { publicLinks, privateLinks } from '@/utils/links';
 import { Link } from 'react-router';
 import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import SignOutLink from './SignOutLink';
@@ -28,7 +28,7 @@ const DropdownListManu = () => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {
-                    links.map((item, index) => {
+                    publicLinks.map((item, index) => {
                         return (
                             <DropdownMenuItem key={index}>
                                 <Link to={item.href}>{item.label}</Link>
@@ -37,6 +37,7 @@ const DropdownListManu = () => {
                     })
                 }
                 <DropdownMenuSeparator />
+
                 <SignedOut>
                     <DropdownMenuItem>
                         <SignInButton mode="modal">
@@ -49,10 +50,19 @@ const DropdownListManu = () => {
                         </SignUpButton>
                     </DropdownMenuItem>
                 </SignedOut>
+
                 <SignedIn>
+                    {
+                        privateLinks.map((item, index) => {
+                            return (
+                                <DropdownMenuItem key={index}>
+                                    <Link to={item.href}>{item.label}</Link>
+                                </DropdownMenuItem>
+                            )
+                        })
+                    }
+                    <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        {/* <UserButton />
-                        <SignOutButton/> */}
                         <SignOutLink />
                     </DropdownMenuItem>
                 </SignedIn>
