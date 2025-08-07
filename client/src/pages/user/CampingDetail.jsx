@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { readCamping } from '@/api/camping';
+import BookingContainer from '@/components/booking/BookingContainer';
 import Breadcrums from '@/components/campings/Breadcrums';
 import Description from '@/components/campings/Description';
 import ImageContainer from '@/components/campings/ImageContainer';
@@ -36,10 +37,19 @@ const CampingDetail = () => {
                 </div>
             </header>
             <ImageContainer image={camping.secure_url} name={camping.name} />
-            <div>
-                <Description text={camping.description} />
-                {camping.lat && <Mainmap location={[camping.lat, camping.lng]} />}
-            </div>
+            <section className='p-4'>
+                <div className='grid grid-cols-1 lg:grid-cols-6 gap-4'>
+                    <Description text={camping.description} />
+                    {camping.lat && <Mainmap location={[camping.lat, camping.lng]} />}
+                </div>
+                <div className='lg:col-span-4 flex flex-col items-center'>
+                    <BookingContainer 
+                        campingId={camping.id}
+                        price={camping.price}
+                        booking={[]}
+                    />
+                </div>
+            </section>
         </div>
     )
 }

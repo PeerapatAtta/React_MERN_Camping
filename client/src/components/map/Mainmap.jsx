@@ -57,9 +57,9 @@ const Mainmap = ({ register, location, setValue }) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
-                <Marker position={location}>
+                {location && <Marker position={location}>
                     <Popup>Location</Popup>
-                </Marker>
+                </Marker>}
 
                 <LocationMarker
                     position={position}
