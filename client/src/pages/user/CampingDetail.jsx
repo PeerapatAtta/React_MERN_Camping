@@ -37,8 +37,8 @@ const CampingDetail = () => {
                 </div>
             </header>
             <ImageContainer image={camping.secure_url} name={camping.name} />
-            <section className='p-4'>
-                <div className='grid grid-cols-1 lg:grid-cols-6 gap-4'>
+            <section className='lg:grid lg:grid-cols-12 gap-x-12 mt-12'>
+                <div className='lg:col-span-8'>
                     <Description text={camping.description} />
                     {camping.lat && <Mainmap location={[camping.lat, camping.lng]} />}
                 </div>
