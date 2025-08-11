@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card"
 import { calTotal } from '@/utils/booking'
 import { formatNumber } from '@/utils/formatNumber'
+import BookingConfirm from './BookingConfirm'
 
 
 const BookingForm = () => {
@@ -32,7 +33,7 @@ const BookingForm = () => {
           <span className='font-semibold'>{` ${formatNumber(result.total)} THB`}</span>
         </p>
       </Card>
-      <p>Confirm Booking</p>
+      <BookingConfirm />
     </div>
   )
 }
