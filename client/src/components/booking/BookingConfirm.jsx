@@ -7,6 +7,7 @@ import { SignInButton, useAuth } from '@clerk/clerk-react';
 import { Button } from '../ui/button';
 import { useForm } from 'react-hook-form';
 import { createBooking } from '@/api/booking';
+import { useNavigate } from 'react-router';
 
 const BookingConfirm = () => {
     // Zustand
@@ -19,6 +20,8 @@ const BookingConfirm = () => {
     // Hook form
     const { handleSubmit, setValue, formState } = useForm();
     const { isSubmitting } = formState;
+    // Navigate
+    const navigate = useNavigate();
 
     if (!userId) {
         return (
@@ -41,6 +44,8 @@ const BookingConfirm = () => {
         try {
             const res = await createBooking(token, value);
             console.log(res);
+            const bookingId = res.data.result;
+            navigate(`/user/checkout/${bookingId}`);
         } catch (error) {
             console.error(error);
         }

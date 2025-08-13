@@ -8,13 +8,16 @@ const calNights = (checkIn, checkOut) => {
     return diffDay;
 }
 
-export const calTotal = (checkIn, checkOut, price) => {
-    if (!checkIn || !checkOut ) {
+exports.calTotal = (checkIn, checkOut, price) => {
+    if (!checkIn || !checkOut || !price) {
         console.error("Missing required parameters for total calculation");
         return 0;
     }
-    // console.log("Calculating total for:", checkIn, checkOut, price);
-    const totalNights = calNights(checkIn, checkOut);
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+
+    const totalNights = calNights(checkInDate, checkOutDate);
     const total = totalNights * price;
-    return { total, totalNight: totalNights };
+    return { total, totalNights };
 }

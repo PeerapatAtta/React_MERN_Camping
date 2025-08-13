@@ -24,7 +24,7 @@ const CampingDetail = () => {
             console.error("Error fetching camping detail:", error);
         }
     };
-    console.log(camping);
+    // console.log(camping);
 
     return (
         <div>
