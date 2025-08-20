@@ -26,7 +26,7 @@ const CampingCard = ({ camping }) => {
                         <h1 className='text-lg font-bold mt-2'>{camping.title}</h1>
                     </div>
                     <div className='text-left'>
-                        <p className='text-gray-600'>{camping.description}</p>
+                        <p className='text-gray-600 text-sm'>{camping.description.substring(0, 50)} ...ดูเพิ่มเติม</p>
                     </div>
                     <div className='text-left'>
                         <p className='font-semibold'>Price: {camping.price} THB</p>
