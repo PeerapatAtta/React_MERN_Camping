@@ -89,6 +89,9 @@ exports.checkout = async (req, res, next) => {
         // 2 Stripe payment
         const session = await stripe.checkout.sessions.create({
             ui_mode: 'embedded',
+            metadata: {
+                bookingId: booking.id,
+            },
             line_items: [
                 {
                     quantity: 1,
@@ -113,3 +116,31 @@ exports.checkout = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.checkOutStatus = async (req, res, next) => {
+    try {
+        console.log("req.params:", req.params);
+        const { session_id } = req.params;
+        console.log("session_id:", session_id);
+        const session = await stripe.checkout.sessions.retrieve(session_id);
+        console.log("session:", session);
+        const bookingId = session.metadata.bookingId;
+        console.log("bookingId:", bookingId);
+
+        if(session.status !=="complete" || !bookingId) {
+            return renderError(res, 400, "Invalid session");
+        }
+
+        const result = await prisma.booking.update({
+            where: { id: Number(bookingId) },
+            data: {
+                paymentStatus: true
+            }
+        });
+
+        res.json({ message: "Payment successful", status: session.status });
+
+    } catch (error) {
+        next(error);
+    }
+};
