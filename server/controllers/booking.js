@@ -3,6 +3,34 @@ const { calTotal } = require("../utils/booking");
 const renderError = require("../utils/renderError");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+exports.listBookings = async (req, res, next) => {
+    try {
+        const { id } = req.user;
+        console.log("User ID:", id);
+        const bookings = await prisma.booking.findMany({
+            where: {
+                profileId: id,
+                paymentStatus: true
+            },
+            include: {
+                landmark: {
+                    select: {
+                        id: true,
+                        title: true,                        
+                    }
+                }
+            },
+            orderBy: {
+                checkIn: "asc"
+            }
+        })
+        console.log("Bookings:", bookings);
+        res.json({ message: "List of bookings", result: bookings });
+    } catch (error) {
+        next(error);
+    }
+};
+
 exports.createBooking = async (req, res, next) => {
     try {
         // Overview
@@ -127,7 +155,7 @@ exports.checkOutStatus = async (req, res, next) => {
         const bookingId = session.metadata.bookingId;
         console.log("bookingId:", bookingId);
 
-        if(session.status !=="complete" || !bookingId) {
+        if (session.status !== "complete" || !bookingId) {
             return renderError(res, 400, "Invalid session");
         }
 

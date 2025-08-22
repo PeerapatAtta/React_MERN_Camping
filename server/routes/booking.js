@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { createBooking, checkout, checkOutStatus } = require('../controllers/booking');
+const { createBooking, checkout, checkOutStatus, listBookings } = require('../controllers/booking');
 const { authCheck } = require('../midllewares/auth');
+
+// Endpoint https://localhost:5000/api/bookings
+router.get('/bookings',authCheck ,listBookings);
 
 // Endpoint https://localhost:5000/api/booking
 router.post('/booking',authCheck ,createBooking);
