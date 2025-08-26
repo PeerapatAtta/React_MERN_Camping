@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatDate, formatNumber } from '@/utils/formats';
+import BookingPDF from '@/components/booking/BookingPDF';
 
 const MyOrders = () => {
 
@@ -47,11 +48,12 @@ const MyOrders = () => {
             <TableHead>Total Price</TableHead>
             <TableHead>Checkin</TableHead>
             <TableHead>Checkout</TableHead>
+            <TableHead>Invoice</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {bookings.map((item) => {
-            console.log(item);
+            // console.log(item);
             const {id, total, totalNights, checkIn, checkOut} = item;
             const {title} = item.landmark;
             return (
@@ -62,6 +64,7 @@ const MyOrders = () => {
                 <TableCell>{formatNumber(total)}THB</TableCell>
                 <TableCell>{formatDate(checkIn)}</TableCell>
                 <TableCell>{formatDate(checkOut)}</TableCell>
+                <TableCell><BookingPDF booking={item}/></TableCell>
               </TableRow>
             );
           })}
