@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatDate, formatNumber } from '@/utils/formats';
 
 const MyOrders = () => {
 
@@ -58,9 +59,9 @@ const MyOrders = () => {
                 <TableCell>{id}</TableCell>
                 <TableCell>{title}</TableCell>
                 <TableCell>{totalNights}</TableCell>
-                <TableCell>{total}THB</TableCell>
-                <TableCell>{checkIn}</TableCell>
-                <TableCell>{checkOut}</TableCell>
+                <TableCell>{formatNumber(total)}THB</TableCell>
+                <TableCell>{formatDate(checkIn)}</TableCell>
+                <TableCell>{formatDate(checkOut)}</TableCell>
               </TableRow>
             );
           })}
