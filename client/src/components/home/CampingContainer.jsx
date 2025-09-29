@@ -2,15 +2,19 @@ import React, { useEffect } from 'react'
 import MapHome from '../map/MapHome'
 import CampingLists from './CampingLists'
 import useCampingStore from '@/store/camping-store'
+import { useUser } from '@clerk/clerk-react'
 
-const CampingContainer = () => {
-  
+const CampingContainer = () => {  
   const actionListCamping = useCampingStore((state) => state.actionListCamping);
+  //Clerk
+  const {user } = useUser();
+  // console.log(user);
 
   useEffect(() => {
-    actionListCamping()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const id = user?.id ?? null;
+    // console.log("User ID:", id);
+    actionListCamping(id)
+  }, [user?.id]);
 
   return (
     <div>
