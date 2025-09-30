@@ -1,18 +1,33 @@
 //RAFCE
 import React from 'react'
-import { Heart } from 'lucide-react';
+import { Heart, RotateCw } from 'lucide-react';
 
 
-export const CardSubmitButtons = () => {
+export const CardSubmitButtons = ({ isPending, isFavorite }) => {
+    // console.log(isPending)
     return (
-        <div>
-            <Heart
-                className='hover:scale-110 hover:duration-300'
-                fill='red'
-                size={34}
-                stroke='white'
-            />
-        </div>
+        <button>
+            {
+                isPending
+                    ? <RotateCw className='animate-spin' />
+                    : isFavorite
+                        ? <Heart
+                            className='hover:scale-110 hover:duration-300'
+                            fill='red'
+                            size={34}
+                            stroke='white'
+                        />
+                        : <Heart
+                            className='hover:scale-110 hover:duration-300'
+                            fill='black'
+                            fillOpacity='70%'
+                            size={34}
+                            stroke='white'
+                        />
+
+            }
+
+        </button>
     )
 }
 

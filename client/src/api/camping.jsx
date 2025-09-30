@@ -16,3 +16,12 @@ export const listCamping = async (id) => {
 export const readCamping = async (id) => {
     return await axios.get(`http://localhost:5000/api/camping/${id}`);
 }
+
+//Favorite
+export const addOrRemoveFavorite = async (token, data) => {
+    return await axios.post('http://localhost:5000/api/favorite', data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
