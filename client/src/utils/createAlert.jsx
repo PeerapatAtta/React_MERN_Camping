@@ -9,3 +9,15 @@ export const createAlert = (icon,text) => {
     });
 
 };  
+
+export const createNotify = (icon,text) => {
+
+    return Swal.fire({
+        position: 'top',  
+        icon: icon ,      
+        text: text,
+        showConfirmButton: false,
+        timer: 2000,
+    });
+
+};  

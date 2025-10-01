@@ -3,7 +3,7 @@ const prisma = require("../config/prisma");
 exports.listCamping = async (req, res, next) => {
     try {
         const { id } = req.params;
-        console.log("User ID:", id);
+        // console.log("User ID:", id);
         const campings = await prisma.landmark.findMany({
             include: {
                 favorites: {
@@ -14,7 +14,7 @@ exports.listCamping = async (req, res, next) => {
         });
         // console.log(campings);
         const campingWithLike = campings.map((item) => {
-            console.log(item.favorites);
+            // console.log(item.favorites);
             return {
                 ...item,
                 isFavorite: item.favorites.length > 0
