@@ -1,6 +1,7 @@
 //RAFCE
 import React from 'react'
 import { Heart, RotateCw } from 'lucide-react';
+import { SignInButton } from '@clerk/clerk-react';
 
 
 export const CardSubmitButtons = ({ isPending, isFavorite }) => {
@@ -33,7 +34,18 @@ export const CardSubmitButtons = ({ isPending, isFavorite }) => {
 
 export const CardSignInButtons = () => {
     return (
-        <div>CardSignInButtons</div>
+        <div>
+            <SignInButton mode='modal'>
+                <Heart
+                    className='hover:scale-110 hover:duration-300'
+                    fill='black'
+                    fillOpacity='70%'
+                    size={34}
+                    stroke='white'
+                />
+            </SignInButton>
+
+        </div>
     )
 }
 

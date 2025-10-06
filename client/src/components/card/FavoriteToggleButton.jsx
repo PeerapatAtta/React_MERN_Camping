@@ -1,6 +1,6 @@
 //rafce
 import React from 'react'
-import { CardSubmitButtons } from './CArdButtons'
+import { CardSignInButtons, CardSubmitButtons } from './CardButtons'
 import useCampingStore from '@/store/camping-store'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@clerk/clerk-react'
@@ -8,7 +8,7 @@ import { createNotify } from '@/utils/createAlert'
 
 const FavoriteToggleButton = ({ campingId, isFavorite }) => {
     // Clerk
-    const { getToken } = useAuth();
+    const { getToken, isSignedIn } = useAuth();
     // const { user } = useUser();
     //HookForm
     const { handleSubmit, formState } = useForm();
@@ -28,6 +28,10 @@ const FavoriteToggleButton = ({ campingId, isFavorite }) => {
         } else {
             createNotify("error",res.message);
         }
+    }
+
+    if (!isSignedIn) {
+        return <CardSignInButtons />
     }
 
     // console.log(campingId, isFavorite)
