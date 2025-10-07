@@ -115,3 +115,33 @@ exports.actionFavorite = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.listFavorites = async (req, res, next) => {
+    try {
+        // console.log(req.user);
+        // res.json("List of favorite camping");
+        const { id } = req.user;
+        const favorites = await prisma.favorite.findMany({
+            where: {
+                profileId: id
+            },
+            include: {
+                landmark: true
+            }
+        });
+
+        const favoriteWithLike = favorites.map((item) => {
+            return {
+                ...item,
+                landmark: {
+                    ...item.landmark,
+                    isFavorite: true
+                }               
+            }
+        });
+
+        res.json({message: "List of favorite camping", result: favoriteWithLike });
+    } catch (error) {
+        next(error);
+    }
+}

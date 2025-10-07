@@ -25,3 +25,11 @@ export const addOrRemoveFavorite = async (token, data) => {
         }
     })
 }
+
+export const listFavorites = async (token) => {
+    return await axios.get('http://localhost:5000/api/favorites', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

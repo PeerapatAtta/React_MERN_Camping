@@ -6,7 +6,8 @@ const {
     createCamping,
     updateCamping,
     deleteCamping,
-    actionFavorite
+    actionFavorite,
+    listFavorites
 } = require('../controllers/camping');
 const { authCheck } = require('../midllewares/auth'); 
 
@@ -18,5 +19,6 @@ router.put('/camping/:id', updateCamping);
 router.delete('/camping/:id', deleteCamping);
 // Favorite
 router.post('/favorite',authCheck,actionFavorite);
+router.get('/favorites',authCheck,listFavorites);
 
 module.exports = router;
