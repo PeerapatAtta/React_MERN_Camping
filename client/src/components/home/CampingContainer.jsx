@@ -3,11 +3,12 @@ import MapHome from '../map/MapHome'
 import CampingLists from './CampingLists'
 import useCampingStore from '@/store/camping-store'
 import { useUser } from '@clerk/clerk-react'
+import CategoryLists from './CategoryLists'
 
-const CampingContainer = () => {  
+const CampingContainer = () => {
   const actionListCamping = useCampingStore((state) => state.actionListCamping);
   //Clerk
-  const {user } = useUser();
+  const { user } = useUser();
   // console.log(user);
 
   useEffect(() => {
@@ -18,8 +19,9 @@ const CampingContainer = () => {
 
   return (
     <div>
-        <MapHome />
-        <CampingLists />
+      <CategoryLists />
+      <MapHome />
+      <CampingLists />
     </div>
   )
 }
