@@ -33,3 +33,7 @@ export const listFavorites = async (token) => {
         }
     })
 }
+
+export const filterCamping = async (category, search) => {
+    return await axios.get(`http://localhost:5000/api/filter-camping?category=${category}&search=${search}`);
+};
