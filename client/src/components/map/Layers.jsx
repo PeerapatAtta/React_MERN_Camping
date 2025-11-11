@@ -22,13 +22,21 @@ const Layers = () => {
                     url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                 />
             </LayersControl.BaseLayer>
+
             <LayersControl.Overlay name="Landmark" checked>
                 <LayerGroup>
                     {campings.map((item) => {
                         return (
                             <Marker key={item.id} position={[item.lat, item.lng]}>
                                 <Popup>
-                                    {item.title} <br /> {item.description}
+                                    <div className='text-center'>
+                                        <p className='text-x1 font-semibold'>{item.title}</p>
+                                        <img
+                                            className="max-w-[200px] rounded-x1"
+                                            src={item.secure_url}
+                                            alt=""
+                                        />
+                                    </div>
                                 </Popup>
                                 <Tooltip>
                                     {item.title}
