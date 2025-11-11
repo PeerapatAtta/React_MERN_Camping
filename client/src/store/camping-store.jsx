@@ -4,10 +4,11 @@ import { create } from "zustand";
 const campingStore = (set, get) => ({
     campings: [],
     favorites: [],
+    center: null,
     actionListCamping: async (id) => {
         try {
             const res = await listCamping(id);
-            set({ campings: res.data.result });
+            set({ campings: res.data.result, center: res.data.center });
         } catch (error) {
             console.error("Error fetching camping data:", error);
         }
@@ -17,7 +18,7 @@ const campingStore = (set, get) => ({
             const res = await addOrRemoveFavorite(token, data);
             const camping = get().campings;
             const { campingId, isFavorite } = data;
-           
+
             const updatedCampings = camping.map(item => {
                 return item.id === campingId
                     ? { ...item, isFavorite: !isFavorite }
@@ -50,11 +51,11 @@ const campingStore = (set, get) => ({
             console.error("Error fetching favorite camping data:", error);
         }
     },
-    actionFilter : async (category='', search='') => {
+    actionFilter: async (category = '', search = '') => {
         try {
             const res = await filterCamping(category, search);
-            console.log("This is Zustand",res);
-            set({ campings: res.data.result });
+            // console.log("This is Zustand",res);
+            set({ campings: res.data.result, center: res.data.center });
         } catch (error) {
             console.error("Error filtering camping data:", error);
         }

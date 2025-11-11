@@ -1,4 +1,5 @@
 const prisma = require("../config/prisma");
+const { findCenter } = require("../utils/findCenter");
 
 exports.listCamping = async (req, res, next) => {
     try {
@@ -20,8 +21,10 @@ exports.listCamping = async (req, res, next) => {
                 isFavorite: item.favorites.length > 0
             }
         })
-        // console.log(campingWithLike);
-        res.json({ result: campingWithLike });
+
+        const center = findCenter(campingWithLike);
+        
+        res.json({ result: campingWithLike, center: center });
     } catch (error) {
         next(error);
     }
@@ -176,7 +179,10 @@ exports.filterCamping = async (req, res, next) => {
 
         // console.log(campingWithLike);
 
-        res.json({ result: campingWithLike });
+        const center = findCenter(campingWithLike);
+        // console.log("Center:", center);
+
+        res.json({ result: campingWithLike, center: center });
 
     } catch (error) {
         next(error);
