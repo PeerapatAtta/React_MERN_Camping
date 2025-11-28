@@ -19,3 +19,32 @@ exports.listStates = async (req, res, next) => {
     }
 };
 
+exports.listReservations = async (req, res, next) => {
+    try {
+        const { id } = req.user;
+
+        const campings = await prisma.landmark.count({
+            where: {
+                profileId: id
+            }
+        });
+        const totals = await prisma.booking.aggregate({
+            where:{
+                profileId: id
+            },
+            _sum: {
+                totalNights: true,
+                total: true
+            }
+        })
+
+        res.json({
+            campings: campings,
+            nights: totals._sum.totalNights || 0,
+            totals: totals._sum.total || 0
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+

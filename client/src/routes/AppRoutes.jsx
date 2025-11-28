@@ -15,6 +15,7 @@ import Checkout from '@/pages/user/Checkout';
 import CheckoutComplete from '@/pages/user/CheckoutComplete';
 import MyOrders from '@/pages/user/MyOrders';
 import MyFavorites from '@/pages/user/MyFavorites';
+import MyReservations from '@/pages/user/MyReservations';
 
 const AppRoutes = () => {
   return (
@@ -27,13 +28,14 @@ const AppRoutes = () => {
         </Route>
 
         {/* Private Member */}
-        <Route path="user" element={<Layout />}>          
+        <Route path="user" element={<Layout />}>
           <Route path="profile" element={<Profile />} />
           <Route path="camping/:id" element={<CampingDetail />} />
           <Route path="checkout/:id" element={<Checkout />} />
           <Route path="complete/:session" element={<CheckoutComplete />} />
           <Route path="myorders" element={<MyOrders />} />
           <Route path="my-favorites" element={<MyFavorites />} />
+          <Route path="my-reservations" element={<MyReservations />} />
         </Route>
 
         {/* Private Admin*/}

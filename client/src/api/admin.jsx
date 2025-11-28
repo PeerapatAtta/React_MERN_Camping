@@ -8,3 +8,11 @@ export const listStates = async (token) => {
     })
 }
 
+export const listReservations = async (token) => {
+    return await axios.get('http://localhost:5000/api/reservations', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
