@@ -16,3 +16,11 @@ export const listReservations = async (token) => {
     })
 }
 
+export const listAllReservations = async (token) => {
+    return await axios.get('http://localhost:5000/api/all-reservations', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+

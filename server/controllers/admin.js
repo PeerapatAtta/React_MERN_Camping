@@ -29,7 +29,7 @@ exports.listReservations = async (req, res, next) => {
             }
         });
         const totals = await prisma.booking.aggregate({
-            where:{
+            where: {
                 profileId: id
             },
             _sum: {
@@ -42,6 +42,37 @@ exports.listReservations = async (req, res, next) => {
             campings: campings,
             nights: totals._sum.totalNights || 0,
             totals: totals._sum.total || 0
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.listAllReservations = async (req, res, next) => {
+    try {
+        const { id } = req.user;
+        const reservations = await prisma.booking.findMany({
+            where: {
+                paymentStatus: true,
+                landmark: {
+                    profileId: id
+                }
+            },
+            include: {
+                landmark: {
+                    select: {
+                        id: true,
+                        title: true,
+                        price: true
+                    }
+                }
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        res.json({
+            result: reservations
         });
     } catch (error) {
         next(error);
